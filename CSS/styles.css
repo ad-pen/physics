@@ -60,6 +60,8 @@ footer {
     font-weight: bold; /* Make links bold */
     text-align: center; /* Center text */
     font-size: 1.1em; /* Slightly smaller font size */
+    width: 100%; /* Ensure the button takes full available width */
+    box-sizing: border-box;
 }
 
 .chapter-list li a:hover {
