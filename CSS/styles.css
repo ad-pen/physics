@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes the full height of the viewport */
+}
+
+header {
+    background-color: #2c3e50;
+    color: rgb(0, 195, 255);
+    padding: 1em;
+    text-align: center;
+}
+
+section {
+    padding: 20px;
+    margin-bottom: 20px; /* Adds space between sections */
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #2c3e50;
+    color: white;
+    margin-top: auto; /* Push footer to the bottom */
+    width: 100%;
+}
+
+.chapter-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 15px; /* Space between links */
+}
+
+.chapter-list li {
+    border: 2px solid #2c3e50; /* Border around each link */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Prevents overflow from rounded corners */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    flex: 0 1 calc(50% - 15px); /* Make each link take up half the width minus gap */
+    max-width: calc(50% - 15px); /* Limit the max width */
+}
+
+.chapter-list li a {
+    display: block; /* Make the entire area clickable */
+    text-decoration: none; /* Remove underline from links */
+    color: #2c3e50; /* Link color */
+    background-color: #e0f7fa; /* Light background color */
+    padding: 10px; /* Add padding for spacing */
+    font-weight: bold; /* Make links bold */
+    text-align: center; /* Center text */
+    font-size: 1.1em; /* Slightly smaller font size */
+}
+
+.chapter-list li a:hover {
+    background-color: #1abc9c;
+    color: white;
+}
+
+.chapter-list li:hover {
+    transform: scale(1.05);
+}
+
+.quiz-question {
+    margin-bottom: 20px;
+}
+
+.quiz-question h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1abc9c;
+}
+
+#quiz-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    display: block;
+    margin: 0 auto; /* Center the canvas */
+}
+
+/* Notes Section: Side-by-Side Layout for Text and Images */
+.notes-section {
+    display: flex; /* Flexbox for side-by-side layout */
+    flex-direction: row;
+    justify-content: space-between; /* Space between text and image */
+    align-items: center; /* Align items vertically in the center */
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.notes-section .text-content {
+    flex: 1; /* Text content takes up more space */
+    margin-right: 20px; /* Add spacing between text and image */
+}
+
+.notes-section h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.notes-section p {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.image-placeholder {
+    flex: 0.4; /* Images take up less space */
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #333;
+    font-style: italic;
+    font-size: 0.9em;
+    margin-bottom: 20px; /* Space below the image */
+}
+
+.image-placeholder p {
+    margin: 0;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .notes-section {
+        flex-direction: column; /* Stack items vertically on small screens */
+    }
+
+    .notes-section .text-content {
+        margin-right: 0;
+        margin-bottom: 20px; /* Add space below text when stacked */
+    }
+
+    .image-placeholder {
+        flex: 1;
+    }
+}
+
