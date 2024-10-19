@@ -19,10 +19,6 @@ header {
 section {
     padding: 20px;
     margin-bottom: 20px; /* Adds space between sections */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center-align items horizontally */
-    justify-content: center; /* Center items vertically */
 }
 
 footer {
@@ -60,8 +56,6 @@ footer {
     font-weight: bold; /* Make links bold */
     text-align: center; /* Center text */
     font-size: 1.1em; /* Slightly smaller font size */
-    width: 100%; /* Ensure the button takes full available width */
-    box-sizing: border-box;
 }
 
 .chapter-list li a:hover {
@@ -171,3 +165,4 @@ canvas {
         flex: 1;
     }
 }
+
