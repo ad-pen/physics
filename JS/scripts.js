@@ -58,19 +58,47 @@ function calculateElectricField(x, y) {
     return { Ex, Ey };
 }
 
-// Function to draw the electric field vector at a specific point
+// Function to draw the electric field vector at a specific point with arrowheads
 function drawFieldAtPoint(x, y) {
     const field = calculateElectricField(x, y);
     const fieldStrength = Math.sqrt(field.Ex * field.Ex + field.Ey * field.Ey);
 
     // Normalize the field vectors and scale for visualization
     const scale = 100 / fieldStrength;  // Adjust the scale for better visualization
+    const endX = x - field.Ex * scale;
+    const endY = y - field.Ey * scale;
 
+    // Draw the line representing the electric field
     ctx.beginPath();
     ctx.moveTo(x, y);
-    ctx.lineTo(x - field.Ex * scale, y - field.Ey * scale);  // Draw field line
+    ctx.lineTo(endX, endY);  
     ctx.strokeStyle = 'black';
     ctx.stroke();
+
+    // Draw arrowhead
+    drawArrowhead(x, y, endX, endY);
+}
+
+// Function to draw an arrowhead at the end of a line
+function drawArrowhead(fromX, fromY, toX, toY) {
+    const angle = Math.atan2(toY - fromY, toX - fromX);
+    const arrowLength = 10;  // Length of the arrowhead lines
+    const arrowWidth = 5;  // Width of the arrowhead angle
+
+    // Draw two lines for the arrowhead
+    ctx.beginPath();
+    ctx.moveTo(toX, toY);
+    ctx.lineTo(
+        toX - arrowLength * Math.cos(angle - Math.PI / 6),
+        toY - arrowLength * Math.sin(angle - Math.PI / 6)
+    );
+    ctx.lineTo(
+        toX - arrowLength * Math.cos(angle + Math.PI / 6),
+        toY - arrowLength * Math.sin(angle + Math.PI / 6)
+    );
+    ctx.lineTo(toX, toY);  // Connect back to the arrow tip
+    ctx.fillStyle = 'black';  // Arrowhead color
+    ctx.fill();
 }
 
 // Function to update charges based on user input
