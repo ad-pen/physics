@@ -7,10 +7,7 @@ const width = canvas.width;
 const height = canvas.height;
 
 // Define an array to store charges
-let charges = [
-    { x: 200, y: 200, charge: 1 },   // Positive charge
-    { x: 400, y: 200, charge: -1 }   // Negative charge
-];
+let charges = [];
 
 // Function to draw the electric field lines based on charges
 function drawElectricField() {
@@ -46,7 +43,9 @@ function calculateElectricField(x, y) {
         const dy = y - charge.y;
         const distanceSquared = dx * dx + dy * dy;
         const distance = Math.sqrt(distanceSquared);
-        
+
+        if (distanceSquared === 0) return; // Avoid division by zero
+
         // Electric field magnitude due to this charge (proportional to 1 / r^2)
         const E = charge.charge / distanceSquared;
 
@@ -71,7 +70,7 @@ function drawFieldAtPoint(x, y) {
     // Draw the line representing the electric field
     ctx.beginPath();
     ctx.moveTo(x, y);
-    ctx.lineTo(endX, endY);  
+    ctx.lineTo(endX, endY);
     ctx.strokeStyle = 'black';
     ctx.stroke();
 
@@ -85,7 +84,6 @@ function drawArrowhead(fromX, fromY, toX, toY) {
     const arrowLength = 10;  // Length of the arrowhead lines
     const arrowWidth = 5;  // Width of the arrowhead angle
 
-    // Draw two lines for the arrowhead
     ctx.beginPath();
     ctx.moveTo(toX, toY);
     ctx.lineTo(
@@ -96,29 +94,34 @@ function drawArrowhead(fromX, fromY, toX, toY) {
         toX - arrowLength * Math.cos(angle + Math.PI / 6),
         toY - arrowLength * Math.sin(angle + Math.PI / 6)
     );
-    ctx.lineTo(toX, toY);  // Connect back to the arrow tip
-    ctx.fillStyle = 'black';  // Arrowhead color
+    ctx.closePath();
+    ctx.fillStyle = 'black';
     ctx.fill();
 }
 
-// Function to update charges based on user input
-function updateCharges() {
-    // Get values from input fields
-    const charge1X = parseFloat(document.getElementById('charge1X').value);
-    const charge1Y = parseFloat(document.getElementById('charge1Y').value);
-    const charge1Value = parseFloat(document.getElementById('charge1Value').value);
+// Function to add a charge
+function addCharge() {
+    const x = parseFloat(prompt("Enter the X-coordinate of the charge (0 to 600):", 300));
+    const y = parseFloat(prompt("Enter the Y-coordinate of the charge (0 to 400):", 200));
+    const charge = parseFloat(prompt("Enter the charge value (1 for positive, -1 for negative):", 1));
 
-    const charge2X = parseFloat(document.getElementById('charge2X').value);
-    const charge2Y = parseFloat(document.getElementById('charge2Y').value);
-    const charge2Value = parseFloat(document.getElementById('charge2Value').value);
-
-    // Update the charges array
-    charges[0] = { x: charge1X, y: charge1Y, charge: charge1Value };
-    charges[1] = { x: charge2X, y: charge2Y, charge: charge2Value };
-
-    // Redraw the electric field with updated charges
-    drawElectricField();
+    if (!isNaN(x) && !isNaN(y) && !isNaN(charge)) {
+        charges.push({ x, y, charge });
+        drawElectricField();
+    } else {
+        alert("Invalid input. Please try again.");
+    }
 }
 
-// Call the function to draw the electric field initially
+// Function to remove the last charge
+function removeCharge() {
+    if (charges.length > 0) {
+        charges.pop();
+        drawElectricField();
+    } else {
+        alert("No charges to remove.");
+    }
+}
+
+// Initial draw
 drawElectricField();
